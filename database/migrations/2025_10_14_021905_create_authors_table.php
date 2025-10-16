@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('negara')->nullable();
-            $table->timestamps();
+            $table->string('name');          // nama author
+            $table->string('photo')->nullable(); // foto bisa kosong
+            $table->text('bio')->nullable(); // deskripsi/bio author
+            $table->timestamps();             // created_at dan updated_at
         });
     }
 
