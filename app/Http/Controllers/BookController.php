@@ -8,7 +8,13 @@ class BookController extends Controller
 {
     public function index()
     {
+        // Ambil data buku beserta nama author-nya
         $books = Book::with('author')->get();
-        return view('book', ['data' => $books, 'title' => '📘 Daftar Buku']);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Daftar semua buku',
+            'data' => $books
+        ]);
     }
 }
