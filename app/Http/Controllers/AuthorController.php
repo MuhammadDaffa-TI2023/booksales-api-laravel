@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    // 🔹 READ: ambil semua data author
+    // 🔹 READ: Ambil semua data author
     public function index()
     {
         $authors = Author::with('books')->get();
@@ -19,7 +19,7 @@ class AuthorController extends Controller
         ]);
     }
 
-    // 🔹 CREATE: tambah author baru
+    // 🔹 CREATE: Tambah author baru
     public function store(Request $request)
     {
         $request->validate([
