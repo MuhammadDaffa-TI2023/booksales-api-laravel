@@ -23,14 +23,15 @@ class GenreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
-            'description' => 'nullable|string',
+            'nama' => 'required|string|max:100',
+            'deskripsi' => 'nullable|string',
         ]);
-
+        
         $genre = Genre::create([
-            'name' => $request->name,
-            'description' => $request->description,
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
         ]);
+        
 
         return response()->json([
             'status' => 'success',

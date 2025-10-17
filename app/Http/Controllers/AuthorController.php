@@ -21,21 +21,24 @@ class AuthorController extends Controller
 
     // 🔹 CREATE: Tambah author baru
     public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required|string|max:100',
-            'negara' => 'nullable|string|max:100',
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:100',
+        'photo' => 'nullable|string|max:255',
+        'bio' => 'nullable|string',
+    ]);
 
-        $author = Author::create([
-            'nama' => $request->nama,
-            'negara' => $request->negara,
-        ]);
+    $author = new Author();
+    $author->name = $request->name;
+    $author->photo = $request->photo;
+    $author->bio = $request->bio;
+    $author->save();
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Author berhasil ditambahkan',
-            'data' => $author
-        ]);
-    }
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Author berhasil ditambahkan',
+        'data' => $author
+    ]);
+}
+
 }
