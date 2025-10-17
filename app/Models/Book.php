@@ -19,13 +19,23 @@ class Book extends Model
         'author_id',
     ];
 
+    
     public function author()
     {
         return $this->belongsTo(Author::class);
     }
 
+    
     public function genre()
     {
         return $this->belongsTo(Genre::class);
+    }
+
+    public function getCoverPhotoUrlAttribute()
+    {
+        if ($this->cover_photo) {
+            return asset('storage/' . $this->cover_photo);
+        }
+        return null;
     }
 }
