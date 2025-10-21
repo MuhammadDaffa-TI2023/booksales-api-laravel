@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    // 🔹 READ all
+   
     public function index()
     {
         $authors = Author::all();
@@ -19,7 +19,7 @@ class AuthorController extends Controller
         ]);
     }
 
-    // 🔹 CREATE
+   
     public function store(Request $request)
     {
         $request->validate([
@@ -37,7 +37,6 @@ class AuthorController extends Controller
         ]);
     }
 
-    // 🔹 SHOW
     public function show($id)
     {
         $author = Author::find($id);
@@ -55,7 +54,7 @@ class AuthorController extends Controller
         ]);
     }
 
-    // 🔹 UPDATE
+    
     public function update(Request $request, $id)
     {
         $author = Author::find($id);
@@ -82,7 +81,7 @@ class AuthorController extends Controller
         ]);
     }
 
-    // 🔹 DESTROY
+   
     public function destroy($id)
     {
         $author = Author::find($id);

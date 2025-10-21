@@ -19,7 +19,7 @@ class TransactionController extends Controller
         ]);
     }
 
-    // 🔹 CREATE: tambah transaksi baru
+    //CREATE: tambah transaksi baru
     public function store(Request $request)
     {
         $request->validate([
@@ -40,6 +40,51 @@ class TransactionController extends Controller
             'status' => 'success',
             'message' => 'Transaksi berhasil ditambahkan',
             'data' => $transaction
+        ]);
+    }
+
+    //SHOW: ambil detail
+    public function show($id)
+    {
+        $transaction = Transaction::with(['book', 'customer'])->findOrFail($id);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Detail transaksi',
+            'data' => $transaction
+        ]);
+    }
+
+    //update
+    public function update(Request $request, $id)
+    {
+        $transaction = Transaction::findOrFail($id);
+
+        $request->validate([
+            'order_number' => 'sometimes|string|max:255',
+            'customer_id' => 'sometimes|exists:users,id',
+            'book_id' => 'sometimes|exists:books,id',
+            'total_amount' => 'sometimes|numeric|min:0',
+        ]);
+
+        $transaction->update($request->all());
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Transaksi berhasil diperbarui',
+            'data' => $transaction
+        ]);
+    }
+
+    //delete
+    public function destroy($id)
+    {
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Transaksi berhasil dihapus'
         ]);
     }
 }
